@@ -1,0 +1,31 @@
+{
+  "name": "Simplicity",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "install:android": "cd android/ && ENVFILE=.env.prod ./gradlew installProdDebug && yarn debug:android && cd .. && yarn start:android",
+    "start:android": "adb shell am start -n com.simplicity.development/.MainActivity",
+    "assemble:android": "cd android/ && ENVFILE=.env.prod ./gradlew assembleProdRelease && cd .. yarn debug:android",
+    "assemble:android:dev": "cd android/ && ENVFILE=.env.dev ./gradlew assembleDevRelease && cd .. yarn debug:android",
+    "debug:android": "adb reverse tcp:8081 tcp:8081",
+    "bump:build:ios": "cd ios/ && agvtool next-version -all && cd ..",
+    "set:build:ios": "cd ios/ && agvtool new-version -all",
+    "set:version:ios": "cd ios/ && agvtool new-marketing-version"
+  },
+  "dependencies": {
+    "react": "16.0.0",
+    "react-native": "0.50.4",
+    "react-native-config": "0.9.1"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
